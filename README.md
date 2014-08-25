@@ -29,3 +29,4 @@ Need to do
 2. Chatting to specific rooms.
 3. Creating event for typing.
 4. Creating sample project for android.
+5. Need to add avatar.
