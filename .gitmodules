@@ -1,0 +1,3 @@
+[submodule "socket.io"]
+	path = socket.io
+	url = git://github.com/cethal/socket.io.git
