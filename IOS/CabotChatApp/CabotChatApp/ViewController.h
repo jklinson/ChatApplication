@@ -13,6 +13,7 @@
 
 @interface ViewController : JSQMessagesViewController<SocketIODelegate>
 
+@property (nonatomic,strong) NSString* nickName;
 @property (nonatomic,strong) SocketIO* socketIO;
 @property (strong, nonatomic) NSMutableArray *messages;
 @property (copy, nonatomic) NSDictionary *avatars;

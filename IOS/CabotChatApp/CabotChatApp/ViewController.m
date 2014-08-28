@@ -27,14 +27,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      *
      *  You should have a mutable array or orderedSet, or something.
      */
-    self.messages = [[NSMutableArray alloc] initWithObjects:
-                     [[JSQMessage alloc] initWithText:@"Welcome to JSQMessages: A messaging UI framework for iOS." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy." sender:kJSQDemoAvatarNameWoz date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"It even has data detectors. You can call me tonight. My cell number is 123-456-7890. My website is www.hexedbits.com." sender:self.sender date:[NSDate distantPast]],
-                     [[JSQMessage alloc] initWithText:@"JSQMessagesViewController is nearly an exact replica of the iOS Messages App. And perhaps, better." sender:kJSQDemoAvatarNameJobs date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"It is unit-tested, free, and open-source." sender:kJSQDemoAvatarNameCook date:[NSDate date]],
-                     [[JSQMessage alloc] initWithText:@"Oh, and there's sweet documentation." sender:self.sender date:[NSDate date]],
-                     nil];
+    self.messages = [[NSMutableArray alloc] init];
     
     /**
      *  Create avatar images once.
@@ -45,7 +38,7 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
      */
     CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
     
-    UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:@"JSQ"
+    UIImage *jsqImage = [JSQMessagesAvatarFactory avatarWithUserInitials:[_nickName substringToIndex:3]
                                                          backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                     font:[UIFont systemFontOfSize:14.0f]
@@ -66,24 +59,9 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
                       kJSQDemoAvatarNameJobs : jobsImage,
                       kJSQDemoAvatarNameWoz : wozImage };
     
-    /**
-     *  Change to add more messages for testing
-     */
-    NSUInteger messagesToAdd = 0;
-    NSArray *copyOfMessages = [self.messages copy];
-    for (NSUInteger i = 0; i < messagesToAdd; i++) {
-        [self.messages addObjectsFromArray:copyOfMessages];
-    }
     
-    /**
-     *  Change to YES to add a super long message for testing
-     *  You should see "END" twice
-     */
-    BOOL addREALLYLongMessage = NO;
-    if (addREALLYLongMessage) {
-        JSQMessage *reallyLongMessage = [JSQMessage messageWithText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? END" sender:self.sender];
-        [self.messages addObject:reallyLongMessage];
-    }
+    
+    
 }
 
 
@@ -103,13 +81,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
 {
     [super viewDidLoad];
     
-    self.title = @"JSQMessages";
+    self.title = @"CabotChatApp";
     
-    self.sender = @"Linson";
+    self.sender = _nickName;
     
     _socketIO = [[SocketIO alloc] initWithDelegate:self];
-    [_socketIO connectToHost:@"192.168.5.178" onPort:3000];
-    [_socketIO sendEvent:@"nicknames" withData:[NSDictionary dictionaryWithObjectsAndKeys:@"test", @"test", nil]];
+    [_socketIO connectToHost:@"192.168.5.159" onPort:3000];
+    [_socketIO sendEvent:@"nickname" withData:self.sender];
     
     [self setupTestModel];
     
@@ -133,19 +111,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
                                     incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"typing"]
-                                                                              style:UIBarButtonItemStyleBordered
-                                                                             target:self
-                                                                             action:@selector(receiveMessagePressed:)];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
-                                                                                              target:self
-                                                                                              action:@selector(receiveMessagePressed:)];
+    
     
 }
 
@@ -180,13 +153,13 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     [self scrollToBottomAnimated:YES];
     
     
-    JSQMessage *receivedMessage = [JSQMessage messageWithText:data[1] sender:data[0]];
-   
+    JSQMessage *receivedMessage = [JSQMessage messageWithText:[data[0] objectForKey:@"text"] sender:[data[0] objectForKey:@"nickname"]];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
         [copyAvatars removeObject:self.sender];
+        
         receivedMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
         
         /**
@@ -267,13 +240,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     JSQMessage *message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
     [self.messages addObject:message];
    
-    NSString *message1 =[NSString stringWithFormat:@"%@,%@",sender,text];
+//    NSString *message1 =[NSString stringWithFormat:@"%@,%@",sender,text];
 //    [NSString stringWithFormat:@"%@,%@",sender,text];
-    NSLog(@"message %@",message1);
-    NSArray *mesg =[[NSArray alloc]initWithObjects:sender,text,nil];
-    NSLog(@"mesg %@",mesg);
-    
-    [_socketIO sendEvent:@"user message" withData:mesg];
+
+    NSMutableDictionary *msgDict =[[NSMutableDictionary alloc]init];
+    [msgDict setValue:text forKey:@"text"];
+    [msgDict setValue:sender forKey:@"nickname"];
+    NSLog(@"user message event is sending with data %@",msgDict);
+    [_socketIO sendEvent:@"user message" withData:msgDict];
     
     [self finishSendingMessage];
 }

@@ -229,14 +229,10 @@ NSString* const SocketIOException = @"SocketIOException";
     // do not require arguments
     
     if (data != nil) {
-        if ([eventName isEqualToString:@"user message"]) {
-            NSLog(@"data %@",data);
-                [dict setObject:data forKey:@"args"];
-        }
-        else{
+       
             
                 [dict setObject:[NSArray arrayWithObject:data] forKey:@"args"];
-        }
+        
         
     }
     

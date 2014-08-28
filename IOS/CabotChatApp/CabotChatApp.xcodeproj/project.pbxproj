@@ -70,6 +70,7 @@
 		303B3D5619A6265200104A03 /* JSQMessagesToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 303B3D2419A6265200104A03 /* JSQMessagesToolbarContentView.xib */; };
 		303B3D5719A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 303B3D2619A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.m */; };
 		303B3D5819A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 303B3D2719A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.xib */; };
+		30961C6619AF030100C212B9 /* LandingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30961C6519AF030100C212B9 /* LandingPageViewController.m */; };
 		309DB1F219A702C900568EA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309DB1F119A702C900568EA9 /* QuartzCore.framework */; };
 		309DB21E19A708F700568EA9 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 309DB1F819A708F700568EA9 /* SBJsonParser.m */; };
 		309DB21F19A708F700568EA9 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 309DB1FA19A708F700568EA9 /* SBJsonStreamParser.m */; };
@@ -202,6 +203,8 @@
 		303B3D2519A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingIndicatorFooterView.h; sourceTree = "<group>"; };
 		303B3D2619A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingIndicatorFooterView.m; sourceTree = "<group>"; };
 		303B3D2719A6265200104A03 /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
+		30961C6419AF030100C212B9 /* LandingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingPageViewController.h; sourceTree = "<group>"; };
+		30961C6519AF030100C212B9 /* LandingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandingPageViewController.m; sourceTree = "<group>"; };
 		309DB1F119A702C900568EA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		309DB1F619A708F700568EA9 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
 		309DB1F719A708F700568EA9 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 				303B3CAD19A625CB00104A03 /* AppDelegate.m */,
 				303B3CAF19A625CB00104A03 /* Main.storyboard */,
 				303B3CB319A625CB00104A03 /* ViewController.m */,
+				30961C6419AF030100C212B9 /* LandingPageViewController.h */,
+				30961C6519AF030100C212B9 /* LandingPageViewController.m */,
 				303B3CB519A625CB00104A03 /* Images.xcassets */,
 				303B3CA419A625CB00104A03 /* Supporting Files */,
 			);
@@ -746,6 +751,7 @@
 				303B3D4C19A6265200104A03 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				309DB22219A708F700568EA9 /* SBJsonStreamParserState.m in Sources */,
 				303B3D5119A6265200104A03 /* JSQMessagesInputToolbar.m in Sources */,
+				30961C6619AF030100C212B9 /* LandingPageViewController.m in Sources */,
 				303B3D4B19A6265200104A03 /* JSQMessagesCollectionViewCell.m in Sources */,
 				303B3D3F19A6265200104A03 /* JSQMessagesKeyboardController.m in Sources */,
 				303B3D4919A6265200104A03 /* JSQMessage.m in Sources */,
