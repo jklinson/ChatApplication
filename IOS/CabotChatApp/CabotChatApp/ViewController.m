@@ -55,9 +55,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     UIImage *wozImage = [JSQMessagesAvatarFactory avatarWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
                                                          diameter:incomingDiameter];
     self.avatars = @{ self.sender : jsqImage,
-                      kJSQDemoAvatarNameCook : cookImage,
-                      kJSQDemoAvatarNameJobs : jobsImage,
-                      kJSQDemoAvatarNameWoz : wozImage };
+                      kJSQDemoAvatarNameCook:cookImage,
+                      kJSQDemoAvatarNameJobs:jobsImage,kJSQDemoAvatarNameWoz:wozImage};
     
     
     
@@ -159,8 +158,8 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
         
         NSMutableArray *copyAvatars = [[self.avatars allKeys] mutableCopy];
         [copyAvatars removeObject:self.sender];
-        
         receivedMessage.sender = [copyAvatars objectAtIndex:arc4random_uniform((int)[copyAvatars count])];
+//        receivedMessage.sender = sender;
         
         /**
          *  This you should do upon receiving a message:
@@ -173,6 +172,14 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
         [self.messages addObject:receivedMessage];
         [self finishReceivingMessage];
     });
+}
+
+-(void)addAvatarObject:(NSArray *)users{
+    for (NSDictionary *user in users) {
+        NSArray *allKeys= [user allKeys];
+        NSLog(@"keys %@",allKeys);
+        
+    }
 }
 
 #pragma mark - Actions
@@ -500,9 +507,17 @@ static NSString * const kJSQDemoAvatarNameWoz = @"Steve Wozniak";
     if([socketPacket.name isEqualToString:@"user message"])
     {
         NSArray* args = socketPacket.args;
-        NSDictionary* arg = args[0];
+        NSDictionary *arg = args[0];
         NSLog(@"arg %@",args);
         [self receivedMessage:args];
+        
+    }
+    else if([socketPacket.name isEqualToString:@"nicknames"])
+    {
+        NSArray* args = socketPacket.args;
+        NSDictionary *arg = args[0];
+        NSLog(@"arg %@",args);
+//        [self addAvatarObject:args];
         
     }
 }

@@ -61,7 +61,7 @@ public class ScreenChat extends Activity {
 				try {
 					sendMessage(message);
 					mEditMessage.getText().clear();					
-					mMessages.add(new Message(message.nickname, message.text));
+					mMessages.add(new Message(message.nickname, message.text,true));
 					mMessageAdapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -115,7 +115,7 @@ public class ScreenChat extends Activity {
 
 						// when we get an event, we safely can cast to the type we specified previously
 						MsgEvent evt = (MsgEvent) event;
-						mMessages.add(new Message(evt.nickname, evt.text));
+						mMessages.add(new Message(evt.nickname, evt.text,false));
 						mMessageAdapter.notifyDataSetChanged();
 						scrollMyListViewToBottom();
 					}

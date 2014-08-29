@@ -12,12 +12,13 @@
         android:id="@+id/list_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
         android:paddingBottom="50dp"
         android:transcriptMode="alwaysScroll"
         android:stackFromBottom="true" >
     </ListView>
 
-    <LinearLayout
+ <!--    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -35,6 +36,37 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:background="@android:drawable/ic_media_play" />
+    </LinearLayout> -->
+    
+    <LinearLayout
+        android:id="@+id/bottom_write_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/message_bar" >
+
+        <EditText
+            android:id="@+id/txt_message"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5sp"
+            android:layout_weight="1"
+            android:background="@drawable/message_field"
+            android:padding="5sp"
+            android:textColor="@color/textFieldColor" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="5sp"
+            android:background="@drawable/send_button"
+            android:id="@+id/btn_send"
+            android:paddingBottom="5sp"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="5sp"
+            android:text="Send"
+            android:textColor="#FFF" />
     </LinearLayout>
 
 </RelativeLayout>
